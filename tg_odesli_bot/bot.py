@@ -142,18 +142,13 @@ class OdesliBot:
     TG_MAX_RETRIES = None
     #: Welcome message template
     WELCOME_MSG_TEMPLATE = (
-        "I'm an (unofficial) Odesli Bot. You can send me a link to a song on "
-        'any supported music streaming platform and I will reply with links '
-        'from all the other platforms. I work in group chats as well. In a '
-        'group chat I will also try to delete original message so that the '
-        'chat remains tidy (you must promote me to admin to enable this).\n'
-        '\n'
-        '<b>Supported platforms:</b> {supported_platforms}.\n'
-        '\n'
-        'The bot is open source. Your feedback, suggestions and PRs are '
-        'welcome: <a href="https://github.com/9dogs/tg-odesli-bot">GitHub</a>.'
-        '\n'
-        'Powered by a great <a href="https://odesli.co/">Odesli</a> service.'
+        'Что может делать этот бот?\n\n'
+        'Просто отправьте боту ссылку на любую любимую песню — и мгновенно получите ссылки на этот трек во всех музыкальных сервисах. Теперь ваши друзья смогут слушать там, где им удобно.\n\n'
+        'Зачем ограничивать своих друзей только одной платформой? Пусть каждый выберет тот сервис, который подходит именно ему.\n\n'
+        'Поддерживаемые платформы:</b> {supported_platforms}.\n\n'
+        'В групповых чатах я также стараюсь удалять исходные сообщения, чтобы поддерживать порядок в чате. Для этого мне нужно предоставить права администратора.\n\n'
+        'Powered by a great Odesli (song.link) (https://odesli.co/) service.'
+
     )
     #: Spotify search limit
     SPOTIFY_SEARCH_LIMIT: int = 4
