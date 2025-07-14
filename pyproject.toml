@@ -5,8 +5,8 @@ description = "Telegram Bot to share music with Odesli (former Songlink) service
 repository = "https://github.com/9dogs/tg-odesli-bot"
 homepage = "https://github.com/9dogs/tg-odesli-bot"
 authors = ["Mikhail Knyazev <hellishbot@gmail.com>"]
-license = "GPL-3.0-only"
-readme = "README.md"
+
+packages = [{ include = "tg_odesli_bot" }]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
