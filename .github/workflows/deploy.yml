@@ -36,4 +36,5 @@ jobs:
           script: |
             cd /opt/stacks/odesli-bot/
             docker-compose pull
-            docker-compose up -d
+            docker-compose up -d --remove-orphans
+            docker image prune -af
