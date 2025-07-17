@@ -1,6 +1,9 @@
+version: '3.8'
 services:
   bot:
     image: aaseregin/tg-odesli-bot:latest
-    env_file:
-      - .env
-    restart: always
+    restart: unless-stopped
+    environment:
+      - TG_ODESLI_BOT_TG_API_TOKEN=${TG_ODESLI_BOT_TG_API_TOKEN}
+      - TG_ODESLI_BOT_SPOTIFY_CLIENT_ID=${TG_ODESLI_BOT_SPOTIFY_CLIENT_ID}
+      - TG_ODESLI_BOT_SPOTIFY_CLIENT_SECRET=${TG_ODESLI_BOT_SPOTIFY_CLIENT_SECRET}

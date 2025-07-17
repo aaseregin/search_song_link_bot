@@ -1,40 +1,26 @@
-name: Build and Deploy
+name: Build and Deploy via Portainer
 
 on:
   push:
     branches: [master]
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Login to DockerHub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Build Docker image
+      run: docker build -t aaseregin/tg-odesli-bot:latest .
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: aaseregin/tg-odesli-bot:latest
+    - name: Push Docker image
+      run: docker push aaseregin/tg-odesli-bot:latest
 
-      - name: Deploy to remote server via SSH
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.REMOTE_SSH_KEY }}
-          script: |
-            cd /opt/stacks/odesli-bot/
-            docker-compose pull
-            docker-compose up -d --remove-orphans
-            docker image prune -af
+    - name: Trigger Portainer Webhook
+      run: curl -X POST "${{ secrets.PORTAINER_WEBHOOK_URL }}"
+       
